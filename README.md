@@ -1,5 +1,10 @@
 # my-kakak9
 ## Progress Log
+🔄 [2024-10-11 06:52:56] Successfully deployed. Found URL:
+https://steve-fd7c1--my-kakak9-my-app-dllwq2c4.web.app
+
+⏱️ Previous step took 36.81 seconds
+
 🔄 [2024-10-11 06:52:20] Deploying to Firebase
 
 ⏱️ Previous step took 1.59 seconds
