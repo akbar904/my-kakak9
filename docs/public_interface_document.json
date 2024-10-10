@@ -1,0 +1,387 @@
+{
+  "package_name": "com.example.aa",
+  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes.",
+  "architecture_overview": "The application follows the Stacked architecture with separate folders for app setup, config, localization, models, services, UI components, and utilities. It uses Stacked for state management, routing, and dependency injection.",
+  "folder_structure": {
+    "lib": {
+      "app": {
+        "app.bottomsheets.dart": {},
+        "app.dart": {},
+        "app.dialogs.dart": {},
+        "app.locator.dart": {},
+        "app.router.dart": {}
+      },
+      "config": {
+        "development": {
+          "firebase_options_development.dart": {}
+        },
+        "production": {
+          "firebase_options_production.dart": {}
+        }
+      },
+      "l10n": {
+        "arb": {
+          "app_en.arb": {},
+          "app_es.arb": {}
+        },
+        "l10n.dart": {},
+        "localizations_extension.dart": {},
+        "supported_locales.dart": {}
+      },
+      "main": {
+        "bootstrap.dart": {},
+        "main_development.dart": {},
+        "main_production.dart": {}
+      },
+      "models": {
+        "enums": {
+          "flavor.dart": {}
+        }
+      },
+      "observer": {
+        "screen_observer.dart": {}
+      },
+      "services": {
+        "analytic_service.dart": {}
+      },
+      "ui": {
+        "bottom_sheets": {
+          "notice": {
+            "notice_sheet.dart": {},
+            "notice_sheet_model.dart": {}
+          }
+        },
+        "common": {
+          "app_colors.dart": {},
+          "ui_helpers.dart": {}
+        },
+        "dialogs": {
+          "info_alert": {
+            "info_alert_dialog.dart": {},
+            "info_alert_dialog_model.dart": {}
+          }
+        },
+        "views": {
+          "app": {
+            "app_view.dart": {},
+            "app_viewmodel.dart": {}
+          },
+          "home": {
+            "home_view.dart": {},
+            "home_viewmodel.dart": {}
+          },
+          "startup": {
+            "startup_view.dart": {},
+            "startup_viewmodel.dart": {}
+          }
+        }
+      },
+      "utils": {
+        "const": {
+          "const.dart": {}
+        },
+        "contact": {
+          "contact_util.dart": {}
+        },
+        "date": {
+          "date_util.dart": {}
+        },
+        "exceptions": {
+          "api_exception.dart": {}
+        },
+        "extensions": {
+          "color_extension.dart": {}
+        },
+        "flavors": {
+          "flavors.dart": {}
+        },
+        "json": {
+          "json_util.dart": {}
+        }
+      }
+    }
+  },
+  "files": [
+    {
+      "name": "lib/app/app.dart",
+      "description": "Defines the app structure using StackedApp annotation for routes, dependencies, bottom sheets, and dialogs.",
+      "class_diagram": "@startuml\nclass App\n@enduml",
+      "methods": [],
+      "dependencies": [
+        "package:stacked/stacked_annotations.dart",
+        "package:stacked_services/stacked_services.dart"
+      ]
+    },
+    {
+      "name": "lib/app/app.router.dart",
+      "description": "Generated router for the Stacked architecture.",
+      "class_diagram": "@startuml\nclass StackedRouter\n@enduml",
+      "methods": [],
+      "dependencies": [
+        "package:stacked/stacked.dart",
+        "package:stacked_services/stacked_services.dart"
+      ]
+    },
+    {
+      "name": "lib/main/bootstrap.dart",
+      "description": "Initializes the app, sets up locator, dialogs, and bottom sheets.",
+      "class_diagram": "@startuml\nclass bootstrap\n@enduml",
+      "methods": [
+        {
+          "name": "bootstrap",
+          "description": "Bootstraps the application",
+          "parameters": ["FutureOr<Widget> Function() builder", "Flavor flavor"],
+          "return_type": "Future<void>"
+        }
+      ],
+      "dependencies": [
+        "package:aa/app/app.bottomsheets.dart",
+        "package:aa/app/app.dialogs.dart",
+        "package:aa/app/app.locator.dart"
+      ]
+    },
+    {
+      "name": "lib/ui/views/app/app_view.dart",
+      "description": "Defines the root widget of the application",
+      "class_diagram": "@startuml\nclass AppView\nclass _App\n@enduml",
+      "methods": [],
+      "dependencies": [
+        "package:aa/app/app.router.dart",
+        "package:aa/l10n/supported_locales.dart",
+        "package:aa/observer/screen_observer.dart",
+        "package:stacked/stacked.dart",
+        "package:stacked_services/stacked_services.dart"
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "name": "AppView",
+      "type": "StatelessWidget",
+      "description": "The root widget of the application, sets up Stacked architecture and MaterialApp.",
+      "file_name": "lib/ui/views/app/app_view.dart"
+    },
+    {
+      "name": "HomeView",
+      "type": "StackedView",
+      "description": "The main home view of the application.",
+      "file_name": "lib/ui/views/home/home_view.dart"
+    },
+    {
+      "name": "StartupView",
+      "type": "StackedView",
+      "description": "The startup view shown when the app is first launched.",
+      "file_name": "lib/ui/views/startup/startup_view.dart"
+    },
+    {
+      "name": "NoticeSheet",
+      "type": "StackedView",
+      "description": "A bottom sheet for displaying notices.",
+      "file_name": "lib/ui/bottom_sheets/notice/notice_sheet.dart"
+    },
+    {
+      "name": "InfoAlertDialog",
+      "type": "StackedView",
+      "description": "A dialog for displaying information alerts.",
+      "file_name": "lib/ui/dialogs/info_alert/info_alert_dialog.dart"
+    }
+  ],
+  "view_models": [
+    {
+      "name": "AppViewModel",
+      "description": "ViewModel for the AppView",
+      "methods": [],
+      "file_name": "lib/ui/views/app/app_viewmodel.dart"
+    },
+    {
+      "name": "HomeViewModel",
+      "description": "ViewModel for the HomeView, manages the state and business logic.",
+      "methods": [
+        {
+          "name": "incrementCounter",
+          "description": "Increments the counter value",
+          "parameters": [],
+          "return_type": "void"
+        },
+        {
+          "name": "showDialog",
+          "description": "Shows a custom dialog",
+          "parameters": [],
+          "return_type": "void"
+        },
+        {
+          "name": "showBottomSheet",
+          "description": "Shows a custom bottom sheet",
+          "parameters": [],
+          "return_type": "void"
+        }
+      ],
+      "file_name": "lib/ui/views/home/home_viewmodel.dart"
+    },
+    {
+      "name": "StartupViewModel",
+      "description": "ViewModel for the StartupView, handles initialization logic.",
+      "methods": [
+        {
+          "name": "runStartupLogic",
+          "description": "Runs the startup logic and navigates to the home view",
+          "parameters": [],
+          "return_type": "Future"
+        }
+      ],
+      "file_name": "lib/ui/views/startup/startup_viewmodel.dart"
+    }
+  ],
+  "models": [
+    {
+      "name": "Flavor",
+      "description": "Enum representing different flavors of the application.",
+      "attributes": ["production", "development"],
+      "file_name": "lib/models/enums/flavor.dart"
+    }
+  ],
+  "services": [
+    {
+      "name": "AnalyticService",
+      "description": "Service for handling analytics",
+      "methods": [
+        {
+          "name": "init",
+          "description": "Initializes the analytic service",
+          "parameters": [],
+          "return_type": "Future<void>"
+        }
+      ],
+      "file_name": "lib/services/analytic_service.dart"
+    }
+  ],
+  "utils": [
+    {
+      "name": "ContactUtil",
+      "description": "Utility class for launching contact-related actions",
+      "methods": [
+        {
+          "name": "launchWhatsApp",
+          "description": "Launches WhatsApp with a given phone number and text",
+          "parameters": ["String phone", "String text"],
+          "return_type": "Future<void>"
+        },
+        {
+          "name": "launchEmail",
+          "description": "Launches email client with a given email address",
+          "parameters": ["String email"],
+          "return_type": "Future<void>"
+        }
+      ],
+      "file_name": "lib/utils/contact/contact_util.dart"
+    },
+    {
+      "name": "HexColor",
+      "description": "Extension on Color for handling hex color strings",
+      "methods": [
+        {
+          "name": "fromHex",
+          "description": "Creates a Color from a hex string",
+          "parameters": ["String hexColorString"],
+          "return_type": "Color"
+        }
+      ],
+      "file_name": "lib/utils/extensions/color_extension.dart"
+    },
+    {
+      "name": "Flavors",
+      "description": "Utility class for handling app flavors",
+      "methods": [],
+      "file_name": "lib/utils/flavors/flavors.dart"
+    },
+    {
+      "name": "JsonUtil",
+      "description": "Utility class for JSON operations",
+      "methods": [
+        {
+          "name": "formatMap",
+          "description": "Formats a dynamic map to a String-keyed map",
+          "parameters": ["Map<dynamic, dynamic> json"],
+          "return_type": "Map<String, dynamic>"
+        },
+        {
+          "name": "fromJsonOrNull",
+          "description": "Safely converts JSON to an object or returns null",
+          "parameters": ["dynamic json", "T Function(Map<String, dynamic>) fromJson"],
+          "return_type": "T?"
+        }
+      ],
+      "file_name": "lib/utils/json/json_util.dart"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "flutter",
+      "version": "sdk: flutter",
+      "purpose": "Flutter framework"
+    },
+    {
+      "name": "stacked",
+      "version": "^3.4.0",
+      "purpose": "Stacked architecture for state management and routing"
+    },
+    {
+      "name": "stacked_services",
+      "version": "^1.1.0",
+      "purpose": "Services for Stacked architecture"
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "sdk: flutter",
+      "purpose": "Internationalization support"
+    },
+    {
+      "name": "intl",
+      "version": "^0.18.0",
+      "purpose": "Internationalization and localization support"
+    },
+    {
+      "name": "url_launcher",
+      "version": "^6.1.10",
+      "purpose": "Launching URLs and external applications"
+    }
+  ],
+  "sequence_diagram": "@startuml\nactor User\nUser -> AppView: Launches app\nAppView -> StartupView: Initializes\nStartupView -> StartupViewModel: Performs startup logic\nStartupViewModel -> HomeView: Navigates on completion\nHomeView -> HomeViewModel: Initializes\nUser -> HomeView: Interacts\nHomeView -> HomeViewModel: Handles user actions\nHomeViewModel -> HomeView: Updates UI\nHomeViewModel -> DialogService: Shows dialog\nHomeViewModel -> BottomSheetService: Shows bottom sheet\n@enduml",
+  "state_management_flow": "State is managed using the Stacked architecture. ViewModels (e.g., HomeViewModel, StartupViewModel) handle the business logic and state for their respective views. The app.locator.dart file sets up dependency injection, while app.router.dart manages navigation between views.",
+  "navigation_flow": "The application starts with the AppView, which sets up the Stacked architecture. It initially shows the StartupView, which then navigates to the HomeView after completing initialization logic. Navigation between views is handled by the Stacked Router defined in app.router.dart.",
+  "internationalization": "The app supports internationalization using Flutter's built-in localization system. Localized strings are stored in ARB files (app_en.arb and app_es.arb) in the l10n/arb directory. The l10n.dart file exports the generated localizations.",
+  "flavors": "The app supports multiple flavors (development and production) defined in the Flavor enum. The bootstrap function in main/bootstrap.dart initializes the app with the appropriate flavor.",
+  "pubspec_yaml": {
+    "name": "aa",
+    "description": "A new Flutter project.",
+    "publish_to": "none",
+    "version": "0.1.0",
+    "environment": {
+      "sdk": ">=3.0.3 <4.0.0"
+    },
+    "dependencies": {
+      "flutter": {
+        "sdk": "flutter"
+      },
+      "flutter_localizations": {
+        "sdk": "flutter"
+      },
+      "stacked": "^3.4.0",
+      "stacked_services": "^1.1.0",
+      "url_launcher": "^6.1.10"
+    },
+    "dev_dependencies": {
+      "build_runner": "^2.4.5",
+      "flutter_test": {
+        "sdk": "flutter"
+      },
+      "flutter_lints": "^2.0.0",
+      "mockito": "^5.4.1",
+      "stacked_generator": "^1.3.3"
+    },
+    "flutter": {
+      "uses-material-design": true,
+      "generate": true
+    }
+  }
+}
