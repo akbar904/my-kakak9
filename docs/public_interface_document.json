@@ -1,6 +1,6 @@
 {
   "package_name": "com.example.aa",
-  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes.",
+  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes. The app includes a counter feature that increments by 2 with each button press.",
   "architecture_overview": "The application follows the Stacked architecture with separate folders for app setup, config, localization, models, services, UI components, and utilities. It uses Stacked for state management, routing, and dependency injection.",
   "folder_structure": {
     "lib": {
@@ -130,7 +130,10 @@
         {
           "name": "bootstrap",
           "description": "Bootstraps the application",
-          "parameters": ["FutureOr<Widget> Function() builder", "Flavor flavor"],
+          "parameters": [
+            "FutureOr<Widget> Function() builder",
+            "Flavor flavor"
+          ],
           "return_type": "Future<void>"
         }
       ],
@@ -199,7 +202,7 @@
       "methods": [
         {
           "name": "incrementCounter",
-          "description": "Increments the counter value",
+          "description": "Increments the counter value by 2",
           "parameters": [],
           "return_type": "void"
         },
@@ -236,7 +239,10 @@
     {
       "name": "Flavor",
       "description": "Enum representing different flavors of the application.",
-      "attributes": ["production", "development"],
+      "attributes": [
+        "production",
+        "development"
+      ],
       "file_name": "lib/models/enums/flavor.dart"
     }
   ],
@@ -263,13 +269,18 @@
         {
           "name": "launchWhatsApp",
           "description": "Launches WhatsApp with a given phone number and text",
-          "parameters": ["String phone", "String text"],
+          "parameters": [
+            "String phone",
+            "String text"
+          ],
           "return_type": "Future<void>"
         },
         {
           "name": "launchEmail",
           "description": "Launches email client with a given email address",
-          "parameters": ["String email"],
+          "parameters": [
+            "String email"
+          ],
           "return_type": "Future<void>"
         }
       ],
@@ -282,7 +293,9 @@
         {
           "name": "fromHex",
           "description": "Creates a Color from a hex string",
-          "parameters": ["String hexColorString"],
+          "parameters": [
+            "String hexColorString"
+          ],
           "return_type": "Color"
         }
       ],
@@ -301,13 +314,18 @@
         {
           "name": "formatMap",
           "description": "Formats a dynamic map to a String-keyed map",
-          "parameters": ["Map<dynamic, dynamic> json"],
+          "parameters": [
+            "Map<dynamic, dynamic> json"
+          ],
           "return_type": "Map<String, dynamic>"
         },
         {
           "name": "fromJsonOrNull",
           "description": "Safely converts JSON to an object or returns null",
-          "parameters": ["dynamic json", "T Function(Map<String, dynamic>) fromJson"],
+          "parameters": [
+            "dynamic json",
+            "T Function(Map<String, dynamic>) fromJson"
+          ],
           "return_type": "T?"
         }
       ],
