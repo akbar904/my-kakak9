@@ -152,50 +152,21 @@
         "package:stacked/stacked.dart",
         "package:stacked_services/stacked_services.dart"
       ]
-    }
-  ],
-  "widgets": [
-    {
-      "name": "AppView",
-      "type": "StatelessWidget",
-      "description": "The root widget of the application, sets up Stacked architecture and MaterialApp.",
-      "file_name": "lib/ui/views/app/app_view.dart"
     },
     {
-      "name": "HomeView",
-      "type": "StackedView",
+      "name": "lib/ui/views/home/home_view.dart",
       "description": "The main home view of the application.",
-      "file_name": "lib/ui/views/home/home_view.dart"
-    },
-    {
-      "name": "StartupView",
-      "type": "StackedView",
-      "description": "The startup view shown when the app is first launched.",
-      "file_name": "lib/ui/views/startup/startup_view.dart"
-    },
-    {
-      "name": "NoticeSheet",
-      "type": "StackedView",
-      "description": "A bottom sheet for displaying notices.",
-      "file_name": "lib/ui/bottom_sheets/notice/notice_sheet.dart"
-    },
-    {
-      "name": "InfoAlertDialog",
-      "type": "StackedView",
-      "description": "A dialog for displaying information alerts.",
-      "file_name": "lib/ui/dialogs/info_alert/info_alert_dialog.dart"
-    }
-  ],
-  "view_models": [
-    {
-      "name": "AppViewModel",
-      "description": "ViewModel for the AppView",
+      "class_diagram": "@startuml\nclass HomeView\n@enduml",
       "methods": [],
-      "file_name": "lib/ui/views/app/app_viewmodel.dart"
+      "dependencies": [
+        "package:stacked/stacked.dart",
+        "package:aa/ui/views/home/home_viewmodel.dart"
+      ]
     },
     {
-      "name": "HomeViewModel",
+      "name": "lib/ui/views/home/home_viewmodel.dart",
       "description": "ViewModel for the HomeView, manages the state and business logic.",
+      "class_diagram": "@startuml\nclass HomeViewModel\n@enduml",
       "methods": [
         {
           "name": "incrementCounter",
@@ -216,11 +187,25 @@
           "return_type": "void"
         }
       ],
-      "file_name": "lib/ui/views/home/home_viewmodel.dart"
+      "dependencies": [
+        "package:stacked/stacked.dart",
+        "package:stacked_services/stacked_services.dart"
+      ]
     },
     {
-      "name": "StartupViewModel",
+      "name": "lib/ui/views/startup/startup_view.dart",
+      "description": "The startup view shown when the app is first launched.",
+      "class_diagram": "@startuml\nclass StartupView\n@enduml",
+      "methods": [],
+      "dependencies": [
+        "package:stacked/stacked.dart",
+        "package:aa/ui/views/startup/startup_viewmodel.dart"
+      ]
+    },
+    {
+      "name": "lib/ui/views/startup/startup_viewmodel.dart",
       "description": "ViewModel for the StartupView, handles initialization logic.",
+      "class_diagram": "@startuml\nclass StartupViewModel\n@enduml",
       "methods": [
         {
           "name": "runStartupLogic",
@@ -229,21 +214,22 @@
           "return_type": "Future"
         }
       ],
-      "file_name": "lib/ui/views/startup/startup_viewmodel.dart"
-    }
-  ],
-  "models": [
+      "dependencies": [
+        "package:stacked/stacked.dart",
+        "package:stacked_services/stacked_services.dart"
+      ]
+    },
     {
-      "name": "Flavor",
-      "description": "Enum representing different flavors of the application.",
-      "attributes": ["production", "development"],
-      "file_name": "lib/models/enums/flavor.dart"
-    }
-  ],
-  "services": [
+      "name": "lib/models/enums/flavor.dart",
+      "description": "Defines the Flavor enum representing different flavors of the application.",
+      "class_diagram": "@startuml\nenum Flavor\n@enduml",
+      "methods": [],
+      "dependencies": []
+    },
     {
-      "name": "AnalyticService",
+      "name": "lib/services/analytic_service.dart",
       "description": "Service for handling analytics",
+      "class_diagram": "@startuml\nclass AnalyticService\n@enduml",
       "methods": [
         {
           "name": "init",
@@ -252,13 +238,12 @@
           "return_type": "Future<void>"
         }
       ],
-      "file_name": "lib/services/analytic_service.dart"
-    }
-  ],
-  "utils": [
+      "dependencies": []
+    },
     {
-      "name": "ContactUtil",
+      "name": "lib/utils/contact/contact_util.dart",
       "description": "Utility class for launching contact-related actions",
+      "class_diagram": "@startuml\nclass ContactUtil\n@enduml",
       "methods": [
         {
           "name": "launchWhatsApp",
@@ -273,11 +258,12 @@
           "return_type": "Future<void>"
         }
       ],
-      "file_name": "lib/utils/contact/contact_util.dart"
+      "dependencies": ["package:url_launcher/url_launcher.dart"]
     },
     {
-      "name": "HexColor",
+      "name": "lib/utils/extensions/color_extension.dart",
       "description": "Extension on Color for handling hex color strings",
+      "class_diagram": "@startuml\nclass HexColor\n@enduml",
       "methods": [
         {
           "name": "fromHex",
@@ -286,17 +272,12 @@
           "return_type": "Color"
         }
       ],
-      "file_name": "lib/utils/extensions/color_extension.dart"
+      "dependencies": ["package:flutter/material.dart"]
     },
     {
-      "name": "Flavors",
-      "description": "Utility class for handling app flavors",
-      "methods": [],
-      "file_name": "lib/utils/flavors/flavors.dart"
-    },
-    {
-      "name": "JsonUtil",
+      "name": "lib/utils/json/json_util.dart",
       "description": "Utility class for JSON operations",
+      "class_diagram": "@startuml\nclass JsonUtil\n@enduml",
       "methods": [
         {
           "name": "formatMap",
@@ -311,7 +292,7 @@
           "return_type": "T?"
         }
       ],
-      "file_name": "lib/utils/json/json_util.dart"
+      "dependencies": []
     }
   ],
   "dependencies": [
@@ -349,12 +330,9 @@
   "sequence_diagram": "@startuml\nactor User\nUser -> AppView: Launches app\nAppView -> StartupView: Initializes\nStartupView -> StartupViewModel: Performs startup logic\nStartupViewModel -> HomeView: Navigates on completion\nHomeView -> HomeViewModel: Initializes\nUser -> HomeView: Interacts\nHomeView -> HomeViewModel: Handles user actions\nHomeViewModel -> HomeView: Updates UI\nHomeViewModel -> DialogService: Shows dialog\nHomeViewModel -> BottomSheetService: Shows bottom sheet\n@enduml",
   "state_management_flow": "State is managed using the Stacked architecture. ViewModels (e.g., HomeViewModel, StartupViewModel) handle the business logic and state for their respective views. The app.locator.dart file sets up dependency injection, while app.router.dart manages navigation between views.",
   "navigation_flow": "The application starts with the AppView, which sets up the Stacked architecture. It initially shows the StartupView, which then navigates to the HomeView after completing initialization logic. Navigation between views is handled by the Stacked Router defined in app.router.dart.",
-  "internationalization": "The app supports internationalization using Flutter's built-in localization system. Localized strings are stored in ARB files (app_en.arb and app_es.arb) in the l10n/arb directory. The l10n.dart file exports the generated localizations.",
-  "flavors": "The app supports multiple flavors (development and production) defined in the Flavor enum. The bootstrap function in main/bootstrap.dart initializes the app with the appropriate flavor.",
   "pubspec_yaml": {
     "name": "aa",
     "description": "A new Flutter project.",
-    "publish_to": "none",
     "version": "0.1.0",
     "environment": {
       "sdk": ">=3.0.3 <4.0.0"
