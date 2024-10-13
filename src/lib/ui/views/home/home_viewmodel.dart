@@ -9,28 +9,33 @@ class HomeViewModel extends BaseViewModel {
 	final _dialogService = locator<DialogService>();
 	final _bottomSheetService = locator<BottomSheetService>();
 
-	String get counterLabel => 'Counter is: $_counter';
+	List<Map<String, dynamic>> _sp500Metrics = [];
 
-	int _counter = 0;
+	List<Map<String, dynamic>> get sp500Metrics => _sp500Metrics;
 
-	void incrementCounter() {
-		_counter += 4;
+	void fetchSP500Metrics() {
+		// Mock data for S&P 500 metrics
+		_sp500Metrics = [
+			{'company': 'Company A', 'price': 3500, 'change': '+1.2%'},
+			{'company': 'Company B', 'price': 4200, 'change': '-0.5%'},
+			{'company': 'Company C', 'price': 3100, 'change': '+0.8%'},
+		];
 		rebuildUi();
 	}
 
 	void showDialog() {
 		_dialogService.showCustomDialog(
 			variant: DialogType.infoAlert,
-			title: 'Steve Rocks!',
-			description: 'Give steve $_counter stars on Github',
+			title: 'S&P 500 Info',
+			description: 'Displaying mock data for S&P 500 metrics.',
 		);
 	}
 
 	void showBottomSheet() {
 		_bottomSheetService.showCustomSheet(
 			variant: BottomSheetType.notice,
-			title: 'title',
-			description: 'desc',
+			title: 'S&P 500 Metrics',
+			description: 'Here are some mock S&P 500 metrics displayed.',
 		);
 	}
 }
