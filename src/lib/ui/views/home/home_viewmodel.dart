@@ -14,7 +14,7 @@ class HomeViewModel extends BaseViewModel {
 	int _counter = 0;
 
 	void incrementCounter() {
-		_counter += 3;
+		_counter += 4;
 		rebuildUi();
 	}
 
