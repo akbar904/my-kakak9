@@ -1,6 +1,6 @@
 {
   "package_name": "com.example.aa",
-  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes. The app is a simple counter application where the counter increments by 4 with each button click.",
+  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes. The app displays mock S&P 500 metrics on the homepage.",
   "architecture_overview": "The application follows the Stacked architecture with separate folders for app setup, config, localization, models, services, UI components, and utilities. It uses Stacked for state management, routing, and dependency injection.",
   "folder_structure": {
     "lib": {
@@ -158,7 +158,7 @@
     },
     {
       "name": "lib/ui/views/home/home_view.dart",
-      "description": "The main home view of the application.",
+      "description": "The main home view of the application, displaying mock S&P 500 metrics.",
       "class_diagram": "@startuml\nclass HomeView\n@enduml",
       "methods": [],
       "dependencies": [
@@ -168,14 +168,14 @@
     },
     {
       "name": "lib/ui/views/home/home_viewmodel.dart",
-      "description": "ViewModel for the HomeView, manages the state and business logic.",
+      "description": "ViewModel for the HomeView, manages the state and business logic for displaying mock S&P 500 data.",
       "class_diagram": "@startuml\nclass HomeViewModel\n@enduml",
       "methods": [
         {
-          "name": "incrementCounter",
-          "description": "Increments the counter value by 4",
+          "name": "fetchSP500Metrics",
+          "description": "Fetches mock S&P 500 metrics data",
           "parameters": [],
-          "return_type": "void"
+          "return_type": "Future<void>"
         },
         {
           "name": "showDialog",
