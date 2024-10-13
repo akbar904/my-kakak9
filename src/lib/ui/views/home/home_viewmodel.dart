@@ -1,36 +1,19 @@
 
-import 'package:my_app/app/app.bottomsheets.dart';
-import 'package:my_app/app/app.dialogs.dart';
-import 'package:my_app/app/app.locator.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-	final _dialogService = locator<DialogService>();
-	final _bottomSheetService = locator<BottomSheetService>();
+	List<Map<String, dynamic>> _sp500MockData = [
+		{'symbol': 'AAPL', 'price': 150.00, 'change': 1.5},
+		{'symbol': 'MSFT', 'price': 250.00, 'change': -0.5},
+		{'symbol': 'GOOGL', 'price': 2800.00, 'change': 2.0},
+	];
 
-	String get counterLabel => 'Counter is: $_counter';
+	List<Map<String, dynamic>> get sp500Metrics => _sp500MockData;
 
-	int _counter = 0;
-
-	void incrementCounter() {
-		_counter += 4;
+	Future<void> fetchSP500Metrics() async {
+		// Simulate a delay for fetching data
+		await Future.delayed(Duration(seconds: 1));
+		// Here you might update the mock data if needed
 		rebuildUi();
-	}
-
-	void showDialog() {
-		_dialogService.showCustomDialog(
-			variant: DialogType.infoAlert,
-			title: 'Steve Rocks!',
-			description: 'Give steve $_counter stars on Github',
-		);
-	}
-
-	void showBottomSheet() {
-		_bottomSheetService.showCustomSheet(
-			variant: BottomSheetType.notice,
-			title: 'title',
-			description: 'desc',
-		);
 	}
 }
