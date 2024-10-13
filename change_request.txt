@@ -1,1 +1,1 @@
-Change the counter to be +4
+Change the homepage to show metrics from S&P 500
