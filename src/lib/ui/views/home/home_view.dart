@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:my_app/ui/views/home/home_viewmodel.dart';
@@ -24,20 +25,31 @@ class HomeView extends StackedView<HomeViewModel> {
                 Column(
                   children: [
                     const Text(
-                      'Hello from STEVE x STACKED!',
+                      'S&P 500 Metrics',
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                     const Gap(25),
-                    MaterialButton(
-                      color: Colors.black,
-                      onPressed: viewModel.incrementCounter,
-                      child: Text(
-                        viewModel.counterLabel,
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                    FutureBuilder<Map<String, dynamic>>(
+                      future: viewModel.fetchSP500Metrics(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return const Text('No data available');
+                        }
+
+                        final metrics = snapshot.data!;
+                        return Column(
+                          children: metrics.entries.map((entry) {
+                            return Text('${entry.key}: ${entry.value}');
+                          }).toList(),
+                        );
+                      },
                     ),
                   ],
                 ),
