@@ -1,7 +1,7 @@
 {
   "package_name": "com.example.aa",
-  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes. The app is a simple counter application where the counter increments by 4 with each button click.",
-  "architecture_overview": "The application follows the Stacked architecture with separate folders for app setup, config, localization, models, services, UI components, and utilities. It uses Stacked for state management, routing, and dependency injection.",
+  "project_description": "A Flutter project using the Stacked architecture, featuring internationalization, multiple flavors, and various utility classes. The app displays metrics from the S&P 500 on the homepage.",
+  "architecture_overview": "The application follows the Stacked architecture with separate folders for app setup, config, localization, models, services, UI components, and utilities. It uses Stacked for state management, routing, and dependency injection. The app integrates with a financial API to fetch and display S&P 500 metrics.",
   "folder_structure": {
     "lib": {
       "app": {
@@ -42,7 +42,8 @@
         "screen_observer.dart": {}
       },
       "services": {
-        "analytic_service.dart": {}
+        "analytic_service.dart": {},
+        "financial_service.dart": {}
       },
       "ui": {
         "bottom_sheets": {
@@ -158,7 +159,7 @@
     },
     {
       "name": "lib/ui/views/home/home_view.dart",
-      "description": "The main home view of the application.",
+      "description": "The main home view of the application, displaying S&P 500 metrics.",
       "class_diagram": "@startuml\nclass HomeView\n@enduml",
       "methods": [],
       "dependencies": [
@@ -168,14 +169,14 @@
     },
     {
       "name": "lib/ui/views/home/home_viewmodel.dart",
-      "description": "ViewModel for the HomeView, manages the state and business logic.",
+      "description": "ViewModel for the HomeView, manages the state and business logic for displaying S&P 500 metrics.",
       "class_diagram": "@startuml\nclass HomeViewModel\n@enduml",
       "methods": [
         {
-          "name": "incrementCounter",
-          "description": "Increments the counter value by 4",
+          "name": "fetchSP500Metrics",
+          "description": "Fetches the latest S&P 500 metrics",
           "parameters": [],
-          "return_type": "void"
+          "return_type": "Future<void>"
         },
         {
           "name": "showDialog",
@@ -192,7 +193,8 @@
       ],
       "dependencies": [
         "package:stacked/stacked.dart",
-        "package:stacked_services/stacked_services.dart"
+        "package:stacked_services/stacked_services.dart",
+        "package:aa/services/financial_service.dart"
       ]
     },
     {
@@ -239,6 +241,20 @@
           "description": "Initializes the analytic service",
           "parameters": [],
           "return_type": "Future<void>"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "lib/services/financial_service.dart",
+      "description": "Service for fetching financial data, specifically S&P 500 metrics.",
+      "class_diagram": "@startuml\nclass FinancialService\n@enduml",
+      "methods": [
+        {
+          "name": "getSP500Metrics",
+          "description": "Fetches S&P 500 metrics from the financial API",
+          "parameters": [],
+          "return_type": "Future<Map<String, dynamic>>"
         }
       ],
       "dependencies": []
@@ -346,7 +362,7 @@
       "purpose": "Launching URLs and external applications"
     }
   ],
-  "sequence_diagram": "@startuml\nactor User\nUser -> AppView: Launches app\nAppView -> StartupView: Initializes\nStartupView -> StartupViewModel: Performs startup logic\nStartupViewModel -> HomeView: Navigates on completion\nHomeView -> HomeViewModel: Initializes\nUser -> HomeView: Interacts\nHomeView -> HomeViewModel: Handles user actions\nHomeViewModel -> HomeView: Updates UI\nHomeViewModel -> DialogService: Shows dialog\nHomeViewModel -> BottomSheetService: Shows bottom sheet\n@enduml",
+  "sequence_diagram": "@startuml\nactor User\nUser -> AppView: Launches app\nAppView -> StartupView: Initializes\nStartupView -> StartupViewModel: Performs startup logic\nStartupViewModel -> HomeView: Navigates on completion\nHomeView -> HomeViewModel: Initializes\nHomeViewModel -> FinancialService: Fetches S&P 500 metrics\nHomeViewModel -> HomeView: Updates UI\nUser -> HomeView: Interacts\nHomeViewModel -> DialogService: Shows dialog\nHomeViewModel -> BottomSheetService: Shows bottom sheet\n@enduml",
   "state_management_flow": "State is managed using the Stacked architecture. ViewModels (e.g., HomeViewModel, StartupViewModel) handle the business logic and state for their respective views. The app.locator.dart file sets up dependency injection, while app.router.dart manages navigation between views.",
   "navigation_flow": "The application starts with the AppView, which sets up the Stacked architecture. It initially shows the StartupView, which then navigates to the HomeView after completing initialization logic. Navigation between views is handled by the Stacked Router defined in app.router.dart.",
   "pubspec_yaml": {
